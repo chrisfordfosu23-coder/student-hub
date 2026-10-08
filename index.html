@@ -640,8 +640,14 @@ window.showLogin = function() {
 
     await signInWithEmailAndPassword(auth, email, password);
 
-    alert("Login successful! 🎉");
-    closeAuth();
+alert("Login successful! 🎉");
+
+document.getElementById("studentEmail").textContent = auth.currentUser.email;
+document.getElementById("studentDashboard").style.display = "block";
+
+document.querySelector("nav").style.display = "none";
+closeAuth();
+    
   } catch (error) {
   if (error.code === "auth/invalid-credential") {
     alert("Incorrect email or password. Please try again.");
@@ -720,9 +726,14 @@ window.logoutUser = async function() {
 
     await signOut(auth);
 
-    document.getElementById("studentDashboard").style.display = "none";
+document.getElementById("studentDashboard").style.display = "none";
+document.querySelector("nav").style.display = "flex";
 
-    alert("You have been logged out.");
+alert("You have been logged out.");
+
+    
+
+    
   } catch (error) {
     console.error("Logout error:", error);
     alert("Logout failed. Please try again.");
@@ -747,6 +758,69 @@ window.logoutUser = async function() {
   <span onclick="showSignup()">Sign Up</span>
     </p>
   </div>
+</div>
+  <!-- STUDENT DASHBOARD -->
+<div id="studentDashboard" style="display:none; padding:25px; max-width:1100px; margin:auto;">
+
+  <h1>🎓 Student Dashboard</h1>
+
+  <p style="margin:10px 0 25px; color:#667085;">
+    Welcome to Student Hub Ghana!
+  </p>
+
+  <div style="background:white; padding:20px; border-radius:15px; border:1px solid #eaecf0; margin-bottom:20px;">
+    <h2>👤 My Account</h2>
+    <p style="margin-top:10px;">Email: <span id="studentEmail">Student</span></p>
+  </div>
+
+  <h2 style="margin-bottom:15px;">Explore Your Dashboard</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="icon">🏫</div>
+      <h3>Schools</h3>
+      <p>Discover universities and colleges in Ghana.</p>
+      <button onclick="alert('Schools directory coming soon!')">
+        Explore Schools
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="icon">📚</div>
+      <h3>Study Materials</h3>
+      <p>Find learning materials and exam resources.</p>
+      <button onclick="alert('Study materials coming soon!')">
+        View Materials
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎓</div>
+      <h3>Admissions</h3>
+      <p>Explore admission information and requirements.</p>
+      <button onclick="alert('Admissions section coming soon!')">
+        View Admissions
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="icon">💼</div>
+      <h3>Opportunities</h3>
+      <p>Discover scholarships and student opportunities.</p>
+      <button onclick="alert('Opportunities coming soon!')">
+        Explore Opportunities
+      </button>
+    </div>
+
+  </div>
+
+  <button
+    onclick="logoutUser()"
+    style="margin-top:25px; background:#d92d20; color:white; border:none; padding:12px 22px; border-radius:8px; cursor:pointer;">
+    Log Out
+  </button>
+
 </div>
 </body>
 </html>
