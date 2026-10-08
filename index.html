@@ -8,221 +8,493 @@
 
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
       font-family: Arial, sans-serif;
     }
 
     body {
-      background: #f4f7fb;
-      color: #172033;
+      background: #f7f9fc;
+      color: #101828;
     }
 
-    header {
-      background: #0b57d0;
+    /* NAVBAR */
+    nav {
+      background: white;
+      padding: 16px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #eaecf0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: bold;
+      color: #155eef;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #344054;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .login-btn {
+      background: #155eef;
+      color: white !important;
+      padding: 10px 18px;
+      border-radius: 8px;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #155eef, #0040c1);
       color: white;
-      padding: 20px;
+      padding: 70px 6%;
       text-align: center;
     }
 
-    header h1 {
-      font-size: 28px;
-      margin-bottom: 6px;
+    .hero h1 {
+      font-size: clamp(34px, 6vw, 58px);
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.1;
     }
 
-    header p {
-      font-size: 14px;
-      opacity: 0.9;
+    .hero p {
+      max-width: 650px;
+      margin: 20px auto;
+      font-size: 17px;
+      line-height: 1.6;
+      opacity: 0.92;
     }
 
-    .container {
-      width: 92%;
-      max-width: 900px;
-      margin: 25px auto;
-    }
-
-    .welcome {
+    .search-box {
+      max-width: 650px;
+      margin: 30px auto 0;
+      display: flex;
       background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      padding: 6px;
+      border-radius: 12px;
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 14px;
+      font-size: 15px;
+      color: #101828;
+    }
+
+    .search-box button {
+      border: none;
+      background: #101828;
+      color: white;
+      padding: 0 22px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* CONTENT */
+    .container {
+      width: 88%;
+      max-width: 1100px;
+      margin: 45px auto;
+    }
+
+    .section-heading {
       margin-bottom: 20px;
     }
 
-    .welcome h2 {
-      margin-bottom: 10px;
+    .section-heading h2 {
+      font-size: 27px;
+      margin-bottom: 7px;
     }
 
-    .welcome p {
+    .section-heading p {
       color: #667085;
-      line-height: 1.5;
     }
 
-    .search {
-      width: 100%;
-      padding: 15px;
-      border: 1px solid #d0d5dd;
-      border-radius: 10px;
-      margin: 20px 0;
-      font-size: 16px;
-      outline: none;
-    }
-
-    .search:focus {
-      border-color: #0b57d0;
-    }
-
-    .section-title {
-      margin: 25px 0 15px;
-      font-size: 22px;
-    }
-
+    /* FEATURE CARDS */
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
     }
 
     .card {
       background: white;
-      padding: 22px;
-      border-radius: 15px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
-      transition: 0.2s;
+      padding: 25px;
+      border-radius: 16px;
+      border: 1px solid #eaecf0;
+      transition: 0.25s;
     }
 
     .card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(16,24,40,0.08);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eff4ff;
+      border-radius: 12px;
+      font-size: 23px;
+      margin-bottom: 18px;
     }
 
     .card h3 {
-      margin-bottom: 8px;
-      color: #0b57d0;
+      margin-bottom: 10px;
+      font-size: 18px;
     }
 
     .card p {
       color: #667085;
       font-size: 14px;
-      line-height: 1.5;
-      margin-bottom: 15px;
+      line-height: 1.6;
+      margin-bottom: 18px;
     }
 
-    button {
-      background: #0b57d0;
+    .card button {
+      background: #155eef;
       color: white;
       border: none;
-      padding: 11px 17px;
+      padding: 10px 15px;
       border-radius: 8px;
       cursor: pointer;
+    }
+
+    /* WHY STUDENT HUB */
+    .why {
+      background: white;
+      border-radius: 20px;
+      padding: 35px;
+      margin-top: 50px;
+      border: 1px solid #eaecf0;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+      margin-top: 25px;
+    }
+
+    .why-item h3 {
+      margin-bottom: 8px;
+    }
+
+    .why-item p {
+      color: #667085;
+      line-height: 1.5;
       font-size: 14px;
     }
 
-    button:hover {
-      background: #0845a8;
+    /* CTA */
+    .cta {
+      margin-top: 50px;
+      background: #101828;
+      color: white;
+      padding: 45px 25px;
+      border-radius: 20px;
+      text-align: center;
     }
 
+    .cta h2 {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      color: #d0d5dd;
+      margin-bottom: 22px;
+    }
+
+    .cta button {
+      background: white;
+      color: #101828;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* FOOTER */
     footer {
+      margin-top: 60px;
+      background: #101828;
+      color: #98a2b3;
+      padding: 35px 6%;
       text-align: center;
-      padding: 30px 15px;
-      margin-top: 40px;
-      color: #667085;
+    }
+
+    footer h3 {
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    footer p {
       font-size: 13px;
+      line-height: 1.6;
     }
 
     #message {
-      margin-top: 15px;
+      text-align: center;
+      margin-top: 20px;
       font-weight: bold;
+      color: #155eef;
+    }
+
+    /* MOBILE */
+    @media (max-width: 650px) {
+      .nav-links a:not(.login-btn) {
+        display: none;
+      }
+
+      .hero {
+        padding: 55px 5%;
+      }
+
+      .search-box {
+        flex-direction: column;
+        background: transparent;
+        gap: 8px;
+      }
+
+      .search-box input {
+        border-radius: 8px;
+        padding: 15px;
+      }
+
+      .search-box button {
+        padding: 13px;
+      }
+
+      .container {
+        width: 92%;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>🎓 Student Hub Ghana</h1>
-    <p>Your student life, all in one place</p>
-  </header>
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="logo">🎓 Student Hub</div>
 
-  <main class="container">
+    <div class="nav-links">
+      <a href="#explore">Explore</a>
+      <a href="#opportunities">Opportunities</a>
+      <a href="#about">About</a>
+      <a href="#login" class="login-btn">Login</a>
+    </div>
+  </nav>
 
-    <section class="welcome">
-      <h2>Welcome to Student Hub 👋🏽</h2>
-      <p>
-        Find schools, courses, admission information and useful resources
-        designed to make student life easier.
-      </p>
 
+  <!-- HERO -->
+  <section class="hero">
+
+    <h1>Your Student Journey Starts Here.</h1>
+
+    <p>
+      Discover schools, courses, admissions, scholarships and opportunities
+      designed to help students in Ghana make better decisions about their future.
+    </p>
+
+    <div class="search-box">
       <input
         type="text"
         id="searchInput"
-        class="search"
-        placeholder="Search schools, courses or resources..."
+        placeholder="Search schools, courses or opportunities..."
         onkeyup="searchCards()"
-      />
+      >
+
+      <button onclick="searchCards()">Search</button>
+    </div>
+
+  </section>
+
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+
+    <section id="explore">
+
+      <div class="section-heading">
+        <h2>Explore Student Hub</h2>
+        <p>Everything you need as a student, in one place.</p>
+      </div>
+
+      <div class="cards" id="cards">
+
+        <div class="card">
+          <div class="icon">🏫</div>
+          <h3>Schools</h3>
+          <p>
+            Explore universities, colleges and institutions across Ghana.
+          </p>
+          <button onclick="showMessage('Schools directory coming soon 🚀')">
+            Explore Schools
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="icon">📚</div>
+          <h3>Courses</h3>
+          <p>
+            Discover courses and understand the career paths they can lead to.
+          </p>
+          <button onclick="showMessage('Course directory coming soon 🚀')">
+            Explore Courses
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="icon">🎓</div>
+          <h3>Admissions</h3>
+          <p>
+            Get useful information about university and college admissions.
+          </p>
+          <button onclick="showMessage('Admissions information coming soon 🚀')">
+            View Admissions
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="icon">💼</div>
+          <h3>Opportunities</h3>
+          <p>
+            Find scholarships, internships, jobs and opportunities for students.
+          </p>
+          <button onclick="showMessage('Opportunities section coming soon 🚀')">
+            Find Opportunities
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="icon">📝</div>
+          <h3>Study Resources</h3>
+          <p>
+            Access useful materials to help you prepare for your studies and exams.
+          </p>
+          <button onclick="showMessage('Study resources coming soon 🚀')">
+            Study Resources
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="icon">👤</div>
+          <h3>Student Account</h3>
+          <p>
+            Create your personal account and eventually manage your student profile.
+          </p>
+          <button onclick="showMessage('Student accounts coming soon 🚀')">
+            Create Account
+          </button>
+        </div>
+
+      </div>
 
       <div id="message"></div>
+
     </section>
 
-    <h2 class="section-title">Explore Student Hub</h2>
 
-    <section class="cards" id="cards">
+    <!-- WHY STUDENT HUB -->
+    <section class="why" id="about">
 
-      <div class="card">
-        <h3>🏫 Schools</h3>
-        <p>Explore universities, colleges and other institutions in Ghana.</p>
-        <button onclick="showMessage('Schools section coming soon!')">
-          Explore
-        </button>
+      <div class="section-heading">
+        <h2>Why Student Hub?</h2>
+        <p>Built to make student life easier.</p>
       </div>
 
-      <div class="card">
-        <h3>📚 Courses</h3>
-        <p>Discover courses and learn more about different career paths.</p>
-        <button onclick="showMessage('Courses section coming soon!')">
-          Explore
-        </button>
+      <div class="why-grid">
+
+        <div class="why-item">
+          <h3>🔎 Easy to Discover</h3>
+          <p>
+            Find useful student information without searching through many websites.
+          </p>
+        </div>
+
+        <div class="why-item">
+          <h3>🇬🇭 Made for Ghana</h3>
+          <p>
+            Designed with Ghanaian students, schools and opportunities in mind.
+          </p>
+        </div>
+
+        <div class="why-item">
+          <h3>⚡ Simple & Fast</h3>
+          <p>
+            A clean experience that works well on mobile phones and computers.
+          </p>
+        </div>
+
+        <div class="why-item">
+          <h3>🚀 Growing Platform</h3>
+          <p>
+            New features will continue to be added as Student Hub develops.
+          </p>
+        </div>
+
       </div>
 
-      <div class="card">
-        <h3>🎯 Admissions</h3>
-        <p>Get useful admission information and application guidance.</p>
-        <button onclick="showMessage('Admissions section coming soon!')">
-          Explore
-        </button>
-      </div>
+    </section>
 
-      <div class="card">
-        <h3>💼 Opportunities</h3>
-        <p>Discover scholarships, jobs, internships and other opportunities.</p>
-        <button onclick="showMessage('Opportunities section coming soon!')">
-          Explore
-        </button>
-      </div>
 
-      <div class="card">
-        <h3>📝 Study Resources</h3>
-        <p>Find resources that can help you learn and prepare for exams.</p>
-        <button onclick="showMessage('Study resources coming soon!')">
-          Explore
-        </button>
-      </div>
+    <!-- CALL TO ACTION -->
+    <section class="cta" id="opportunities">
 
-      <div class="card">
-        <h3>👤 Student Account</h3>
-        <p>Your future personal student dashboard will be available here.</p>
-        <button onclick="showMessage('Student accounts coming soon!')">
-          Open
-        </button>
-      </div>
+      <h2>Build Your Future With Student Hub.</h2>
+
+      <p>
+        Stay informed. Discover opportunities. Make better decisions.
+      </p>
+
+      <button onclick="showMessage('Student registration coming soon 🚀')">
+        Join Student Hub
+      </button>
 
     </section>
 
   </main>
 
+
+  <!-- FOOTER -->
   <footer>
-    © 2026 Student Hub Ghana — Built for students 🇬🇭
+
+    <h3>🎓 Student Hub Ghana</h3>
+
+    <p>
+      Helping students discover schools, courses and opportunities.
+    </p>
+
+    <p>
+      © 2026 Student Hub Ghana. All rights reserved.
+    </p>
+
   </footer>
+
 
   <script>
 
@@ -230,7 +502,9 @@
       document.getElementById("message").textContent = message;
     }
 
+
     function searchCards() {
+
       const input = document
         .getElementById("searchInput")
         .value
@@ -239,6 +513,7 @@
       const cards = document.querySelectorAll(".card");
 
       cards.forEach(function(card) {
+
         const text = card.textContent.toLowerCase();
 
         if (text.includes(input)) {
@@ -246,7 +521,9 @@
         } else {
           card.style.display = "none";
         }
+
       });
+
     }
 
   </script>
