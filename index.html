@@ -612,6 +612,17 @@ window.closeAuth = function() {
 window.showSignup = function() {
   document.getElementById("authTitle").textContent = "Create your account 🚀";
   document.getElementById("authMainBtn").textContent = "Sign Up";
+  document.getElementById("authMainBtn").onclick = signupUser;
+  document.getElementById("authSwitch").innerHTML =
+    'Already have an account? <span onclick="showLogin()">Login</span>';
+};
+
+window.showLogin = function() {
+  document.getElementById("authTitle").textContent = "Welcome back 👋";
+  document.getElementById("authMainBtn").textContent = "Login";
+  document.getElementById("authMainBtn").onclick = loginUser;
+  document.getElementById("authSwitch").innerHTML =
+    'Don\'t have an account? <span onclick="showSignup()">Sign Up</span>';
 };
   window.loginUser = async function() {
   const email = document.getElementById("authEmail").value;
@@ -700,11 +711,11 @@ window.showSignup = function() {
     <input type="email" id="authEmail" placeholder="Email address">
     <input type="password" id="authPassword" placeholder="Password">
 
-    <button onclick="signupUser()" id="authMainBtn">Sign Up</button>
+    <button onclick="loginUser()" id="authMainBtn">Login</button>
 
-    <p>
-      Don't have an account?
-      <span onclick="showSignup()">Sign Up</span>
+    <p id="authSwitch">
+  Don't have an account?
+  <span onclick="showSignup()">Sign Up</span>
     </p>
   </div>
 </div>
