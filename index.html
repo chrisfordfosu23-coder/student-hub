@@ -1,19 +1,255 @@
-<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Student Hub</title>
-<style>
-*{box-sizing:border-box}body{margin:0;background:#eef2f7;font-family:Arial;color:#14213d}.app{max-width:430px;margin:auto;min-height:100vh;background:#fff;padding-bottom:75px}
-header{padding:18px;display:flex;justify-content:space-between;font-size:21px;font-weight:800}.blue{color:#1264ff}.search{margin:5px 16px 15px;padding:14px;background:#f1f5fb;border-radius:14px;color:#718096}.hero{margin:0 16px 18px;padding:20px;border-radius:18px;background:linear-gradient(135deg,#0758d8,#1d86ff);color:white}.hero h1{margin:0 0 8px}.hero button{padding:11px 15px;border:0;border-radius:10px;background:#ffd22e;font-weight:bold}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 16px 18px}.tile{padding:15px 5px;text-align:center;border:1px solid #e3e8ef;border-radius:14px;font-size:12px;font-weight:bold}.tile b{display:block;font-size:23px;margin-bottom:7px}.section{padding:0 16px}.card,.item,.post{padding:14px;border:1px solid #e3e8ef;border-radius:14px;margin-bottom:10px}.card h3{margin:5px 0}.muted{color:#718096;font-size:12px}.tag{color:#1264ff;background:#e9f2ff;border-radius:7px;padding:5px;font-size:10px;font-weight:bold}.page{display:none}.page.active{display:block}.head{padding:17px 16px;border-bottom:1px solid #eee;font-size:19px;font-weight:bold}.back{border:0;background:none;font-size:25px;margin-right:10px}.item{display:flex;justify-content:space-between}.arrow{color:#1264ff;font-size:20px}.user{font-weight:bold}.avatar{display:inline-flex;width:36px;height:36px;border-radius:50%;background:#dceaff;align-items:center;justify-content:center;margin-right:8px}.actions{color:#718096;font-size:12px}nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);height:70px;background:white;border-top:1px solid #ddd;display:flex;justify-content:space-around;padding-top:10px}nav div{text-align:center;font-size:10px;color:#718096;font-weight:bold}nav span{display:block;font-size:21px;margin-bottom:3px}nav .on{color:#1264ff}
-</style></head><body><div class="app">
-<header>🎓 Student <span class="blue">Hub</span><span>🔔</span></header>
-<main id="home" class="page active"><div class="search" onclick="go('search')">🔍 Search materials, schools...</div>
-<div class="hero"><h1>Dream Bigger.<br>Study Smarter.</h1><p>Your all-in-one platform for students in Ghana.</p><button onclick="go('study')">Explore Study Materials</button></div>
-<div class="grid"><div class="tile" onclick="go('study')"><b>📚</b>Study</div><div class="tile" onclick="go('schools')"><b>🏫</b>Schools</div><div class="tile" onclick="go('community')"><b>💬</b>Community</div><div class="tile"><b>📢</b>News</div><div class="tile"><b>🎓</b>Scholarships</div><div class="tile"><b>🔖</b>Saved</div></div>
-<div class="section"><h3>Latest Updates</h3><div class="card"><span class="tag">ADMISSIONS</span><h3>University admission updates</h3><span class="muted">Important dates and application information.</span></div><div class="card"><span class="tag">SCHOLARSHIP</span><h3>New scholarship opportunities</h3></div></div></main>
-<main id="study" class="page"><div class="head"><button class="back" onclick="go('home')">‹</button>Study Materials</div><div class="search">🔍 Search past questions, notes...</div><div class="section"><div class="item">📝 <b>Past Questions</b><span class="arrow">›</span></div><div class="item">📒 <b>Lecture Notes</b><span class="arrow">›</span></div><div class="item">📚 <b>Course Materials</b><span class="arrow">›</span></div><div class="item">✅ <b>Exam Solutions</b><span class="arrow">›</span></div></div></main>
-<main id="schools" class="page"><div class="head"><button class="back" onclick="go('home')">‹</button>Schools</div><div class="search">🔍 Find a university or college...</div><div class="section"><div class="item">🏛️ <span><b>University of Ghana</b><br><small class="muted">Legon • Public</small></span><span class="arrow">›</span></div><div class="item">🎓 <span><b>KNUST</b><br><small class="muted">Kumasi • Public</small></span><span class="arrow">›</span></div><div class="item">🏫 <span><b>University of Cape Coast</b><br><small class="muted">Cape Coast • Public</small></span><span class="arrow">›</span></div><div class="item">🔬 <span><b>GCTU</b><br><small class="muted">Accra • Private</small></span><span class="arrow">›</span></div></div></main>
-<main id="community" class="page"><div class="head"><button class="back" onclick="go('home')">‹</button>Community</div><div class="section"><div class="post"><div class="user"><span class="avatar">KT</span>Kwame_Tech <small class="muted"> • UG • 2h</small></div><p><b>Can someone share the latest UG past questions?</b></p><div class="actions">👍 45 &nbsp; 💬 12 &nbsp; ↗ Share</div></div><div class="post"><div class="user"><span class="avatar">NA</span>Nana_Ama <small class="muted"> • KNUST • 5h</small></div><p>Does anyone have notes for Organic Chemistry?</p><div class="actions">👍 32 &nbsp; 💬 8</div></div></div></main>
-<main id="search" class="page"><div class="head"><button class="back" onclick="go('home')">‹</button>Search</div><div class="search">🔍 Type what you're looking for...</div><div class="section"><h3>Popular Searches</h3><div class="grid" style="padding:0"><div class="tile">UG Past Questions</div><div class="tile">KNUST Notes</div><div class="tile">UCC Admission</div><div class="tile">Scholarships</div></div></div></main>
-<main id="profile" class="page"><div class="head"><button class="back" onclick="go('home')">‹</button>My Profile</div><div class="section" style="text-align:center;padding-top:25px"><div class="avatar" style="width:90px;height:90px;font-size:30px">SU</div><h2>Student User</h2><span class="tag">LEVEL 200</span><div class="card" style="text-align:left;margin-top:25px">🏫 <b>School</b><br><small class="muted">University / College</small></div><div class="card" style="text-align:left">📚 <b>Programme</b><br><small class="muted">Your programme</small></div></div></main>
-<nav><div class="on" onclick="go('home',this)"><span>⌂</span>Home</div><div onclick="go('study',this)"><span>📚</span>Study</div><div onclick="go('schools',this)"><span>🏫</span>Schools</div><div onclick="go('community',this)"><span>💬</span>Community</div><div onclick="go('profile',this)"><span>👤</span>Profile</div></nav>
-</div><script>
-function go(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav div').forEach(x=>x.classList.remove('on'));let m={home:0,study:1,schools:2,community:3,profile:4};if(m[id]!=null)document.querySelectorAll('nav div')[m[id]].classList.add('on');scrollTo(0,0)}
-</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Student Hub Ghana</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #0b57d0;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 900px;
+      margin: 25px auto;
+    }
+
+    .welcome {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+
+    .welcome h2 {
+      margin-bottom: 10px;
+    }
+
+    .welcome p {
+      color: #667085;
+      line-height: 1.5;
+    }
+
+    .search {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #d0d5dd;
+      border-radius: 10px;
+      margin: 20px 0;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .search:focus {
+      border-color: #0b57d0;
+    }
+
+    .section-title {
+      margin: 25px 0 15px;
+      font-size: 22px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 15px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      color: #0b57d0;
+    }
+
+    .card p {
+      color: #667085;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    button {
+      background: #0b57d0;
+      color: white;
+      border: none;
+      padding: 11px 17px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background: #0845a8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 15px;
+      margin-top: 40px;
+      color: #667085;
+      font-size: 13px;
+    }
+
+    #message {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🎓 Student Hub Ghana</h1>
+    <p>Your student life, all in one place</p>
+  </header>
+
+  <main class="container">
+
+    <section class="welcome">
+      <h2>Welcome to Student Hub 👋🏽</h2>
+      <p>
+        Find schools, courses, admission information and useful resources
+        designed to make student life easier.
+      </p>
+
+      <input
+        type="text"
+        id="searchInput"
+        class="search"
+        placeholder="Search schools, courses or resources..."
+        onkeyup="searchCards()"
+      />
+
+      <div id="message"></div>
+    </section>
+
+    <h2 class="section-title">Explore Student Hub</h2>
+
+    <section class="cards" id="cards">
+
+      <div class="card">
+        <h3>🏫 Schools</h3>
+        <p>Explore universities, colleges and other institutions in Ghana.</p>
+        <button onclick="showMessage('Schools section coming soon!')">
+          Explore
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>📚 Courses</h3>
+        <p>Discover courses and learn more about different career paths.</p>
+        <button onclick="showMessage('Courses section coming soon!')">
+          Explore
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>🎯 Admissions</h3>
+        <p>Get useful admission information and application guidance.</p>
+        <button onclick="showMessage('Admissions section coming soon!')">
+          Explore
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>💼 Opportunities</h3>
+        <p>Discover scholarships, jobs, internships and other opportunities.</p>
+        <button onclick="showMessage('Opportunities section coming soon!')">
+          Explore
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>📝 Study Resources</h3>
+        <p>Find resources that can help you learn and prepare for exams.</p>
+        <button onclick="showMessage('Study resources coming soon!')">
+          Explore
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>👤 Student Account</h3>
+        <p>Your future personal student dashboard will be available here.</p>
+        <button onclick="showMessage('Student accounts coming soon!')">
+          Open
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Student Hub Ghana — Built for students 🇬🇭
+  </footer>
+
+  <script>
+
+    function showMessage(message) {
+      document.getElementById("message").textContent = message;
+    }
+
+    function searchCards() {
+      const input = document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+      const cards = document.querySelectorAll(".card");
+
+      cards.forEach(function(card) {
+        const text = card.textContent.toLowerCase();
+
+        if (text.includes(input)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+
+  </script>
+
+</body>
+</html>
