@@ -643,7 +643,13 @@ window.showLogin = function() {
     alert("Login successful! 🎉");
     closeAuth();
   } catch (error) {
-    alert("Login failed: " + error.message);
+  if (error.code === "auth/invalid-credential") {
+    alert("Incorrect email or password. Please try again.");
+  } else if (error.code === "auth/user-not-found") {
+    alert("No account found with this email. Please sign up first.");
+  } else {
+    alert("Login failed. Please try again.");
+  }
   }
 };
   window.signupUser = async function() {
@@ -697,7 +703,12 @@ window.showLogin = function() {
     alert("Account created successfully! 🎉");
     closeAuth();
   } catch (error) {
+  if (error.code === "auth/email-already-in-use") {
+    alert("You already have an account. Please log in.");
+    showLogin();
+  } else {
     alert("Sign Up failed: " + error.message);
+  }
   }
 };
 </script>
