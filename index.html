@@ -711,6 +711,26 @@ window.showLogin = function() {
   }
   }
 };
+    }
+};
+
+window.logoutUser = async function() {
+  try {
+    const { signOut } = await import(
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"
+    );
+
+    await signOut(auth);
+
+    document.getElementById("studentDashboard").style.display = "none";
+
+    alert("You have been logged out.");
+  } catch (error) {
+    console.error("Logout error:", error);
+    alert("Logout failed. Please try again.");
+  }
+};
+</script>
 </script>
 <div id="authModal" class="auth-modal">
   <div class="auth-box">
