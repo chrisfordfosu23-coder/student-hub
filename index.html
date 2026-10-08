@@ -702,16 +702,14 @@ window.showLogin = function() {
 
     alert("Account created successfully! 🎉");
     closeAuth();
-  } catch (error) {
-  if (error.code === "auth/email-already-in-use") {
-    alert("You already have an account. Please log in.");
-    showLogin();
-  } else {
-    alert("Sign Up failed: " + error.message);
-  }
-  }
-};
+    } catch (error) {
+    if (error.code === "auth/email-already-in-use") {
+      alert("You already have an account. Please log in.");
+      showLogin();
+    } else {
+      alert("Sign Up failed: " + error.message);
     }
+  }
 };
 
 window.logoutUser = async function() {
@@ -731,7 +729,7 @@ window.logoutUser = async function() {
   }
 };
 </script>
-</script>
+  
 <div id="authModal" class="auth-modal">
   <div class="auth-box">
     <button class="close-auth" onclick="closeAuth()">×</button>
