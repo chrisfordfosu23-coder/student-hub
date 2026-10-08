@@ -527,6 +527,22 @@
     }
 
   </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyDxa9zH2sEwx2DvPVrqTG_U_VMcn5RvPJY",
+    authDomain: "gh-students-hub.firebaseapp.com",
+    projectId: "gh-students-hub",
+    storageBucket: "gh-students-hub.firebasestorage.app",
+    messagingSenderId: "1007268669056",
+    appId: "1:1007268669056:web:3ed6d5d99e36de9f50e865",
+    measurementId: "G-7Q7NCHTLGM"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+</script>
 </body>
 </html>
