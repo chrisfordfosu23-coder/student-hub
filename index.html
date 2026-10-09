@@ -730,6 +730,7 @@ padding: 20px !important;
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDxa9zH2sEwx2DvPVrqTG_U_VMcn5RvPJY",
@@ -743,13 +744,28 @@ padding: 20px !important;
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  onAuthStateChanged(auth, function(user) {
+  const db = getFirestore(app);
+  onAuthStateChanged(auth, async function(user) {
 const dashboard = document.getElementById("studentDashboard");
 const homePage = document.getElementById("homePage");
 const nav = document.querySelector("nav");
 
 if (user) {
 document.getElementById("studentEmail").textContent = user.email || "Student";
+  // LOAD SAVED ACADEMIC INFORMATION
+try {
+  const academicDoc = await getDoc(doc(db, "students", user.uid));
+
+  if (academicDoc.exists()) {
+    const data = academicDoc.data();
+
+    document.getElementById("studentUniversity").value = data.university || "";
+    document.getElementById("studentProgramme").value = data.programme || "";
+    document.getElementById("studentLevel").value = data.level || "";
+  }
+} catch (error) {
+  console.error("Could not load academic information:", error);
+}
   document.getElementById("studentName").textContent = user.displayName || "Student";
 dashboard.style.display = "block";
 homePage.style.display = "none";
@@ -928,6 +944,39 @@ window.editStudentProfile = async function() {
     alert("Could not update your profile: " + error.message);
   }
 };
+  // SAVE ACADEMIC INFORMATION
+window.saveAcademicInfo = async function() {
+  const user = auth.currentUser;
+
+  if (!user) {
+    alert("Please log in first.");
+    return;
+  }
+
+  const university = document.getElementById("studentUniversity").value.trim();
+  const programme = document.getElementById("studentProgramme").value.trim();
+  const level = document.getElementById("studentLevel").value;
+
+  if (!university || !programme || !level) {
+    alert("Please complete all academic information fields.");
+    return;
+  }
+
+  try {
+    await setDoc(doc(db, "students", user.uid), {
+      university: university,
+      programme: programme,
+      level: level,
+      updatedAt: new Date().toISOString()
+    }, { merge: true });
+
+    alert("Academic information saved successfully! 🎓");
+
+  } catch (error) {
+    console.error("Academic information error:", error);
+    alert("Could not save your information. Please try again.");
+  }
+};
 window.goHome = function() {
   document.getElementById("studentDashboard").style.display = "none";
   document.getElementById("homePage").style.display = "block";
@@ -1010,6 +1059,56 @@ alert("You have been logged out.");
     </button>
     <p style="margin-top:10px;">Name: <span id="studentName">Student</span></p><p style="margin-top:10px;">Email: <span id="studentEmail">Student</span></p>
   </div>
+  <!-- ACADEMIC INFORMATION -->
+<div style="margin-top:20px; background:white; padding:24px; border-radius:18px; border:1px solid #eaecf0;">
+
+  <h2>🎓 Academic Information</h2>
+
+  <label for="studentUniversity" style="display:block; margin-top:18px; font-weight:bold;">
+    University / College
+  </label>
+  <input
+    type="text"
+    id="studentUniversity"
+    placeholder="e.g. University of Ghana"
+    style="width:100%; padding:12px; margin-top:8px; border:1px solid #d0d5dd; border-radius:8px;"
+  >
+
+  <label for="studentProgramme" style="display:block; margin-top:18px; font-weight:bold;">
+    Programme of Study
+  </label>
+  <input
+    type="text"
+    id="studentProgramme"
+    placeholder="e.g. Medical Laboratory Science"
+    style="width:100%; padding:12px; margin-top:8px; border:1px solid #d0d5dd; border-radius:8px;"
+  >
+
+  <label for="studentLevel" style="display:block; margin-top:18px; font-weight:bold;">
+    Academic Level
+  </label>
+  <select
+    id="studentLevel"
+    style="width:100%; padding:12px; margin-top:8px; border:1px solid #d0d5dd; border-radius:8px; background:white;"
+  >
+    <option value="">Select your level</option>
+    <option value="Level 100">Level 100</option>
+    <option value="Level 200">Level 200</option>
+    <option value="Level 300">Level 300</option>
+    <option value="Level 400">Level 400</option>
+    <option value="Level 500">Level 500</option>
+    <option value="Level 600">Level 600</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <button
+    onclick="saveAcademicInfo()"
+    style="width:100%; margin-top:22px; padding:13px; background:#155eef; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;"
+  >
+    💾 Save Academic Information
+  </button>
+
+</div>
 
   
   
