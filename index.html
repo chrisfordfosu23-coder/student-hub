@@ -353,7 +353,7 @@
   /* ===== PREMIUM STUDENT DASHBOARD ===== */
 
 #studentDashboard {
-  display: block;
+  display: none;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -508,8 +508,11 @@ padding: 20px !important;
   </nav>
 
 
-  <!-- HERO -->
-  <section class="hero">
+  <!-- HOMEPAGE CONTENT -->
+<div id="homePage">
+
+<!-- HERO -->
+<section class="hero">
 
     <h1>Your Student Journey Starts Here.</h1>
 
@@ -692,7 +695,7 @@ padding: 20px !important;
     </p>
 
   </footer>
-
+  </div>
 
   <script>
 
@@ -783,9 +786,12 @@ window.showLogin = function() {
 alert("Login successful! 🎉");
 
 document.getElementById("studentEmail").textContent = auth.currentUser.email;
+
+document.getElementById("homePage").style.display = "none";
+document.querySelector("nav").style.display = "none";
+
 document.getElementById("studentDashboard").style.display = "block";
 
-document.querySelector("nav").style.display = "none";
 closeAuth();
     
   } catch (error) {
@@ -867,6 +873,7 @@ window.logoutUser = async function() {
     await signOut(auth);
 
 document.getElementById("studentDashboard").style.display = "none";
+document.getElementById("homePage").style.display = "block";
 document.querySelector("nav").style.display = "flex";
 
 alert("You have been logged out.");
