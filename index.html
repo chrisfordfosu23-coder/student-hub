@@ -730,7 +730,7 @@ padding: 20px !important;
   </script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDxa9zH2sEwx2DvPVrqTG_U_VMcn5RvPJY",
@@ -744,6 +744,22 @@ padding: 20px !important;
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  onAuthStateChanged(auth, function(user) {
+const dashboard = document.getElementById("studentDashboard");
+const homePage = document.getElementById("homePage");
+const nav = document.querySelector("nav");
+
+if (user) {
+document.getElementById("studentEmail").textContent = user.email || "Student";
+dashboard.style.display = "block";
+homePage.style.display = "none";
+nav.style.display = "none";
+} else {
+dashboard.style.display = "none";
+homePage.style.display = "block";
+nav.style.display = "flex";
+}
+});
   window.openAuth = function() {
   document.getElementById("authModal").style.display = "flex";
 };
@@ -962,11 +978,18 @@ alert("You have been logged out.");
 
   </div>
 
-  <button
+<button
+     onclick="goHome()"
+     style="margin-top:25px; margin-right:10px; background:#155eef; color:white; border:none; padding:12px 22px; border-radius:8px; cursor:pointer;">
+     🏠 Home
+</button>
+
+<button
     onclick="logoutUser()"
     style="margin-top:25px; background:#d92d20; color:white; border:none; padding:12px 22px; border-radius:8px; cursor:pointer;">
     Log Out
-  </button>
+</button>
+  
 
 </div>
 </body>
