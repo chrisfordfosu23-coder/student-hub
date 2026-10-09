@@ -945,19 +945,22 @@ window.editStudentProfile = async function() {
   }
 };
   // SAVE ACADEMIC INFORMATION
-saveAcademicInfo = async function() {
-  const user = auth.
-
-    const user = auth.currentUser;
+  window.saveAcademicInfo = async function() {
+  const user = auth.currentUser;
 
   if (!user) {
     alert("Please log in first.");
     return;
   }
 
-  const university = document.getElementById("studentUniversity").value.trim();
-  const programme = document.getElementById("studentProgramme").value.trim();
-  const level = document.getElementById("studentLevel").value;
+  const university = document
+    .getElementById("studentUniversity").value.trim();
+
+  const programme = document
+    .getElementById("studentProgramme").value.trim();
+
+  const level = document
+    .getElementById("studentLevel").value;
 
   if (!university || !programme || !level) {
     alert("Please complete all academic information fields.");
@@ -974,9 +977,11 @@ saveAcademicInfo = async function() {
 
     const saveButton = document.getElementById("saveAcademicBtn");
 
-if (saveButton) {
-  saveButton.textContent = "✅ Academic Information Saved";
-  saveButton.style.background = "#12b76a";
+    if (saveButton) {
+      saveButton.textContent = "✅ Academic Information Saved";
+      saveButton.style.background = "#12b76a";
+    }
+
     alert("Academic information saved successfully! 🎓");
 
   } catch (error) {
@@ -1108,7 +1113,7 @@ alert("You have been logged out.");
     <option value="Other">Other</option>
   </select>
 
-  <button   id="saveAcademicBtn".
+  <button id="saveAcademicBtn"
     onclick="saveAcademicInfo()"
     style="width:100%; margin-top:22px; padding:13px; background:#155eef; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;"
   >
