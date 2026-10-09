@@ -879,7 +879,11 @@ closeAuth();
     }
   }
 };
-
+window.goHome = function() {
+  document.getElementById("studentDashboard").style.display = "none";
+  document.getElementById("homePage").style.display = "block";
+  document.querySelector("nav").style.display = "flex";
+};
 window.logoutUser = async function() {
   try {
     const { signOut } = await import(
