@@ -945,8 +945,10 @@ window.editStudentProfile = async function() {
   }
 };
   // SAVE ACADEMIC INFORMATION
-window.saveAcademicInfo = async function() {
-  const user = auth.currentUser;
+saveAcademicInfo = async function() {
+  const user = auth.
+
+    const user = auth.currentUser;
 
   if (!user) {
     alert("Please log in first.");
@@ -970,6 +972,11 @@ window.saveAcademicInfo = async function() {
       updatedAt: new Date().toISOString()
     }, { merge: true });
 
+    const saveButton = document.getElementById("saveAcademicBtn");
+
+if (saveButton) {
+  saveButton.textContent = "✅ Academic Information Saved";
+  saveButton.style.background = "#12b76a";
     alert("Academic information saved successfully! 🎓");
 
   } catch (error) {
@@ -1101,7 +1108,7 @@ alert("You have been logged out.");
     <option value="Other">Other</option>
   </select>
 
-  <button
+  <button   id="saveAcademicBtn".
     onclick="saveAcademicInfo()"
     style="width:100%; margin-top:22px; padding:13px; background:#155eef; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;"
   >
