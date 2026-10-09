@@ -750,6 +750,7 @@ const nav = document.querySelector("nav");
 
 if (user) {
 document.getElementById("studentEmail").textContent = user.email || "Student";
+  document.getElementById("studentName").textContent = user.displayName || "Student";
 dashboard.style.display = "block";
 homePage.style.display = "none";
 nav.style.display = "none";
@@ -847,35 +848,84 @@ closeAuth();
   }
 };
   window.signupUser = async function() {
-  const email = document.getElementById("authEmail").value;
-  const password = document.getElementById("authPassword").value;
+const name = document.getElementById("authName").value.trim();
+const email = document.getElementById("authEmail").value.trim();
+const password = document.getElementById("authPassword").value;
 
-  if (!email || !password) {
-    alert("Please enter your email and password.");
+if (!name || !email || !password) {
+alert("Please enter your full name, email, and password.");
+return;
+}
+
+if (password.length < 6) {
+alert("Password must be at least 6 characters.");
+return;
+}
+
+try {
+const { createUserWithEmailAndPassword, updateProfile } =
+await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js");
+
+const credential = await createUserWithEmailAndPassword(
+  auth,
+  email,
+  password
+);
+
+await updateProfile(credential.user, {
+  displayName: name
+});
+
+alert("Account created successfully! 🎉");
+closeAuth();
+
+} catch (error) {
+if (error.code === "auth/email-already-in-use") {
+alert("You already have an account. Please log in.");
+showLogin();
+} else {
+alert("Sign Up failed: " + error.message);
+}
+}
+};
+
+// EDIT STUDENT PROFILE
+window.editStudentProfile = async function() {
+  const user = auth.currentUser;
+
+  if (!user) {
+    alert("Please log in first.");
     return;
   }
 
-  if (password.length < 6) {
-    alert("Password must be at least 6 characters.");
+  const newName = prompt(
+    "Enter your full name:",
+    user.displayName || ""
+  );
+
+  if (newName === null) return;
+
+  if (!newName.trim()) {
+    alert("Your name cannot be empty.");
     return;
   }
 
   try {
-    const { createUserWithEmailAndPassword } = await import(
+    const { updateProfile } = await import(
       "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"
     );
 
-    await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(user, {
+      displayName: newName.trim()
+    });
 
-    alert("Account created successfully! 🎉");
-    closeAuth();
-    } catch (error) {
-    if (error.code === "auth/email-already-in-use") {
-      alert("You already have an account. Please log in.");
-      showLogin();
-    } else {
-      alert("Sign Up failed: " + error.message);
-    }
+    document.getElementById("studentName").textContent =
+      newName.trim();
+
+    alert("Profile updated successfully! 🎉");
+
+  } catch (error) {
+    alert("Could not update your profile: " + error.message);
   }
 };
 window.goHome = function() {
@@ -914,8 +964,27 @@ alert("You have been logged out.");
     <h2>Student Hub</h2>
     <p id="authTitle">Welcome back 👋</p>
 
-    <input type="email" id="authEmail" placeholder="Email address">
-    <input type="password" id="authPassword" placeholder="Password">
+    <input
+  type="text"
+  id="authName"
+  placeholder="Full name"
+  autocomplete="name"
+>
+
+<input
+  type="email"
+  id="authEmail"
+  placeholder="Email address"
+  autocomplete="email"
+>
+
+<input
+  type="password"
+  id="authPassword"
+  placeholder="Password"
+  autocomplete="new-password"
+>
+    
 
     <button onclick="loginUser()" id="authMainBtn">Login</button>
 
@@ -936,7 +1005,10 @@ alert("You have been logged out.");
 
   <div style="background:white; padding:20px; border-radius:15px; border:1px solid #eaecf0; margin-bottom:20px;">
     <h2>👤 My Account</h2>
-    <p style="margin-top:10px;">Email: <span id="studentEmail">Student</span></p>
+    <button onclick="editStudentProfile()" style="margin-top:15px; background:#155eef; color:white; border:none; padding:12px 20px; border-radius:8px; cursor:pointer; font-size:14px;">
+  ✏️ Edit Profile
+    </button>
+    <p style="margin-top:10px;">Name: <span id="studentName">Student</span></p><p style="margin-top:10px;">Email: <span id="studentEmail">Student</span></p>
   </div>
 
   
